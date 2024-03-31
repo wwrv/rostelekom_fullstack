@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import 'bootstrap/dist/css/bootstrap.css';
 import '../app/globalStyles/globals.css'
 import '../app/globalStyles/menu.css'
+import './globalStyles/mobile-navbar.css'
 
 import Layout from "@/components/layouts/Layout";
 

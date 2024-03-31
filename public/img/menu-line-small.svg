@@ -1,7 +1,12 @@
-<svg width="146.000000" height="2.000000" viewBox="0 0 146 2" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-	<desc>
-			Created with Pixso.
-	</desc>
-	<defs/>
-	<path d="M0 0L20 0L20 2L0 2L0 0ZM24 0L42 0L42 2L24 2L24 0ZM46 0L62 0L62 2L46 2L46 0ZM66 0L80 0L80 2L66 2L66 0ZM84 0L96 0L96 2L84 2L84 0ZM100 0L110 0L110 2L100 2L100 0ZM114 0L122 0L122 2L114 2L114 0ZM126 0L132 0L132 2L126 2L126 0ZM136 0L140 0L140 2L136 2L136 0ZM144 0L146 0L146 2L144 2L144 0Z" fill="#9466FF" fill-opacity="1.000000" fill-rule="evenodd"/>
+<svg width="146" height="2" viewBox="0 0 146 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 0H20V2H0V0Z" fill="#9466FF"/>
+<path d="M24 0H42V2H24V0Z" fill="#9466FF"/>
+<path d="M46 0H62V2H46V0Z" fill="#9466FF"/>
+<path d="M66 0H80V2H66V0Z" fill="#9466FF"/>
+<path d="M84 0H96V2H84V0Z" fill="#9466FF"/>
+<path d="M100 0H110V2H100V0Z" fill="#9466FF"/>
+<path d="M114 0H122V2H114V0Z" fill="#9466FF"/>
+<path d="M126 0H132V2H126V0Z" fill="#9466FF"/>
+<path d="M136 0H140V2H136V0Z" fill="#9466FF"/>
+<path d="M144 0H146V2H144V0Z" fill="#9466FF"/>
 </svg>
