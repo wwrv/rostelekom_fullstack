@@ -11,7 +11,6 @@ import Accordion from "../Accordion/Accordion";
 import { usePathname } from "next/navigation";
 import path from "path";
 import MenuLinkItem from "./MenuLinkItem";
-import Link from "next/link";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import BuyersListItems from "./BuyersListItems";
 import ContactsListItems from "./ContactsListItems";

@@ -3,9 +3,10 @@ export const removeOverFlowHiddenFromBody = () => {
     body.classList.remove('overflow-hidden')
 };
 
-export const addOverFlowHiddenFromBody = () => {
+export const addOverFlowHiddenFromBody = ( paddingRight = '') => {
     const body = document.querySelector('body') as HTMLBodyElement
     body.classList.add('overflow-hidden')
+    paddingRight && (body.style.paddingRight = paddingRight)
 }
 
 export const getWindowWidth = () => {
