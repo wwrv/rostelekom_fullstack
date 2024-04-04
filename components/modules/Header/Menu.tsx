@@ -1,7 +1,7 @@
 import Logo from "@/components/elements/Logo/Logo";
 import { AllowedLangs } from "@/constants/lang";
 import { setLang } from "@/context/lang";
-import { $menuIsOpen, closeMenu } from "@/context/madals";
+import { $menuIsOpen, closeMenu } from "@/context/modals";
 import { useLang } from "@/hooks/useLang";
 import { removeOverFlowHiddenFromBody } from "@/lib/utils/common";
 import { useUnit } from "effector-react";

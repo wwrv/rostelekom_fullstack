@@ -1,6 +1,6 @@
 'use client'
 import Link from "next/link";
-import { closeCatalogMenu, closeMenu, openCatalogMenu, openMenu } from "@/context/madals";
+import { closeCatalogMenu, closeMenu, openCatalogMenu, openMenu } from "@/context/modals";
 import { useLang } from "@/hooks/useLang"
 import { addOverFlowHiddenFromBody } from "@/lib/utils/common";
 import CatalogMenu from "../Header/CatalogMenu";

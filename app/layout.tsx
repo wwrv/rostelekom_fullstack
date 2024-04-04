@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../app/globalStyles/globals.css'
 import '../app/globalStyles/menu.css'
 import './globalStyles/mobile-navbar.css'
+import './globalStyles/search-modal.css'
+
 
 import Layout from "@/components/layouts/Layout";
 

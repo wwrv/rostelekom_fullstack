@@ -2,12 +2,12 @@
 
 import { AnimatePresence, motion } from "framer-motion"
 import { useState } from "react"
-import { $catalogMenuIsOpen, closeCatalogMenu } from "@/context/madals"
+import { $catalogMenuIsOpen, closeCatalogMenu } from "@/context/modals"
 import { useLang } from "@/hooks/useLang"
 import { useMenuAnimation } from "@/hooks/useMenuAnimation"
 import Header from "./Header"
 import { removeOverFlowHiddenFromBody } from "@/lib/utils/common"
-import { useStore } from "effector-react"
+import { useUnit } from "effector-react"
 import { useMediaQuery } from "@/hooks/useMediaQuery"
 import CatalogMenuButton from "./CatalogMenuButton"
 import CatalogMenuList from "./CatalogMenuList"
@@ -15,7 +15,7 @@ import Accordion from "../Accordion/Accordion"
 import Link from "next/link"
 
 const CatalogMenu = () => {
-    const catalogMenuIsOpen = useStore($catalogMenuIsOpen)
+    const catalogMenuIsOpen = useUnit($catalogMenuIsOpen)
     const [showClothList, setShowClothList] = useState(false)
     const [showAccessoriesList, setShowAccessoriesList] = useState(false)
     const [showSouvenirsList, setShowSouvenirsList] = useState(false)
