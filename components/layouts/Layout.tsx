@@ -11,6 +11,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import SearchModal from '../modules/Header/SearchModal'
 import { $searchModal } from '@/context/modals'
 import { handleCloseSearchModal } from '@/lib/utils/common'
+import Footer from '../modules/Footer/Footer'
 
 
 const Layout = ({ children }: {
@@ -40,7 +41,7 @@ const Layout = ({ children }: {
         onClick={handleCloseSearchModal}
       />
 
-      <div className=''></div>
+      <Footer />
     </>
   )
 }

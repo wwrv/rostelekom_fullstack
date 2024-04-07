@@ -5,6 +5,8 @@ import '../app/globalStyles/menu.css'
 import './globalStyles/mobile-navbar.css'
 import './globalStyles/search-modal.css'
 import './globalStyles/cart-popup.css'
+import './globalStyles/footer.css'
+
 
 
 import Layout from "@/components/layouts/Layout";
