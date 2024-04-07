@@ -10,6 +10,7 @@ import Menu from "./Menu"
 import Logo from "@/components/elements/Logo/Logo"
 
 import '../../../app/globalStyles/header.css'
+import CartPopup from "./CartPopup/CartPopup"
 
 
 const Header = () => {
@@ -51,7 +52,7 @@ const Header = () => {
             <Link href='/comparison' className="header__links__item__btn header__links__item__btn--compare"/>
         </li>
         <li className="header__links__item">
-            <Link href='/cart' className="header__links__item__btn header__links__item__btn--cart"/>
+            <CartPopup />
         </li>
         <li className="header__links__item header__links__item--profile">
             <Link href='/profile' className="header__links__item__btn header__links__item__btn--profile"/>

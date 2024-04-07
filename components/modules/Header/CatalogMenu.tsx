@@ -124,10 +124,7 @@ return (
                 exit="closed"
                 variants={sideVariants}
             >
-                <img 
-                    className="catalog-menu__bg"
-                    src="/img/menu-bg-small.png"
-                    alt='menu background'/>
+
                 <motion.button 
                     className="btn-reset catalog-menu__close"
                     variants={itemVariants}
