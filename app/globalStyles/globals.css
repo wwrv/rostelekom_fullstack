@@ -150,8 +150,8 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: 50%;
   height: 45px;
   border: 2px solid #70F;
-  left: -5px;
-  top: -5px;
+  left: -3.6px;
+  top: -3.3px;
 }
 
 .sizes-table-btn {
