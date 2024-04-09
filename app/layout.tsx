@@ -6,6 +6,9 @@ import './globalStyles/mobile-navbar.css'
 import './globalStyles/search-modal.css'
 import './globalStyles/cart-popup.css'
 import './globalStyles/footer.css'
+import './globalStyles/slick.css'
+import './globalStyles/slick-theme.css'
+
 
 
 
