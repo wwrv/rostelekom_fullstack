@@ -61,7 +61,7 @@ const ProductListItem = ({ item, title }: IProductsListItemProps) => {
               {title ? (
                 <span 
                   className={`${styles.list__item__label} ${isTitleForNew 
-                    ? styles.list__item__label_new 
+                    ? styles.list__item__new 
                     : styles.list__item__bestseller
                   }`}
                 >

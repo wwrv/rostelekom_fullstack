@@ -4,6 +4,7 @@ import Hero from "@/components/modules/MainPage/Hero/Hero"
 import { useGate } from "effector-react"
 import { MainPageGate } from '@/context/goods'
 import BestsellerGoods from "@/components/modules/MainPage/BestsellerGoods"
+import NewGoods from "@/components/modules/MainPage/NewGoods"
 
 const MainPage = () => {
   useGate(MainPageGate)
@@ -11,6 +12,7 @@ const MainPage = () => {
     <main>
       <Hero />
       <Categories />
+      <NewGoods />
       <BestsellerGoods />
     </main>
   )
