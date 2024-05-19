@@ -1,5 +1,5 @@
-// import { IProduct } from './common'
-// там еще коммент,может не работать
+import { IProduct } from './common'
+
 export interface IAccordionProps {
   children: React.ReactNode
   title: string | JSX.Element
@@ -23,7 +23,7 @@ export interface ICatalogMenuButtonProps {
 }
 
 export interface IProductsListItemProps {
-//   item: IProduct
+  item: IProduct
   title?: string
 }
 
