@@ -9,9 +9,10 @@ import './../../app/globalStyles/catalog-menu.css'
 import './../../app/globalStyles/search-modal.css'
 import { AnimatePresence, motion } from 'framer-motion'
 import SearchModal from '../modules/Header/SearchModal'
-import { $searchModal } from '@/context/modals'
+import { $searchModal, $showQuickViewModal, showQuickViewModal } from '@/context/modals'
 import { handleCloseSearchModal } from '@/lib/utils/common'
 import Footer from '../modules/Footer/Footer'
+import QuickViewModal from '../modules/QuickViewModal/QuickViewModal'
 
 
 const Layout = ({ children }: {
@@ -19,6 +20,7 @@ const Layout = ({ children }: {
 }) => {
   const isMedia800 = useMediaQuery(800)
   const searchModal = useUnit($searchModal)
+  const showQuickViewModal = useUnit($showQuickViewModal)
 
   return (
     <>
@@ -36,11 +38,24 @@ const Layout = ({ children }: {
           </motion.div>
         )}
       </AnimatePresence>
+      {!isMedia800 && (
+        <AnimatePresence>
+          {showQuickViewModal && (
+            <motion.div
+            
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <QuickViewModal />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      )}
       <div 
         className={`header__search-overlay ${searchModal ? 'overlay-active' : '' } `}
         onClick={handleCloseSearchModal}
       />
-
       <Footer />
     </>
   )
