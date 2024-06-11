@@ -14,6 +14,8 @@ import { handleCloseSearchModal } from '@/lib/utils/common'
 import Footer from '../modules/Footer/Footer'
 import QuickViewModal from '../modules/QuickViewModal/QuickViewModal'
 import SizeTable from '../modules/SizeTable/SizeTable'
+import { $openAuthPopup, openAuthPopup } from '@/context/auth'
+import AuthPopup from '../modules/AuthPopup/AuthPopup'
 
 
 const Layout = ({ children }: {
@@ -23,12 +25,25 @@ const Layout = ({ children }: {
   const searchModal = useUnit($searchModal)
   const showQuickViewModal = useUnit($showQuickViewModal)
   const showSizeTable = useUnit($showSizeTable)
+  const openAuthPopup = useUnit($openAuthPopup)
+
   return (
     <>
       <Header />
       {children}
       {isMedia800 && < MobileNavbar />}
       <AnimatePresence>
+        {openAuthPopup && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+              exit={{ opacity: 0, scale: 0.5 }}
+              className='auth-popup-wrapper'
+            >
+              <AuthPopup />
+            </motion.div>
+          )}
         {searchModal && (
           <motion.div 
             initial = {{ opacity: 0, zIndex: 102 }}

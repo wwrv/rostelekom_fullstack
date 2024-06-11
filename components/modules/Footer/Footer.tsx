@@ -34,7 +34,7 @@ const Footer = () => {
                 <ul className='list-reset footer__socials'>
                     <li className='footer__socials__item'>
                         <a
-                            href='https://t.me/dvejer'
+                            href='https://t.me/wwrvvv'
                             className='footer__socials__item__link'
                         />
                     </li>
