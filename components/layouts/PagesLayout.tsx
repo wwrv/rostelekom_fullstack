@@ -5,12 +5,14 @@ import Layout from "./Layout"
 import { useUnit } from "effector-react"
 import { closeSizeTableByCheck, handleCloseAuthPopup, removeOverFlowHiddenFromBody } from "@/lib/utils/common"
 import { $openAuthPopup } from "@/context/auth"
+import { Toaster } from "react-hot-toast"
 
 const PageLayout = ({ children } : { children: React.ReactNode }) => {
   
   const showQuickViewModal = useUnit($showQuickViewModal)
   const showSizeTable = useUnit($showSizeTable)
   const openAuthPopup = useUnit($openAuthPopup)
+  
   const handleCloseQuickViewModal = () => {
     removeOverFlowHiddenFromBody()
     closeQuickViewModal()
@@ -30,7 +32,7 @@ const PageLayout = ({ children } : { children: React.ReactNode }) => {
         className={`auth-overlay ${openAuthPopup ? 'overlay-active' : '' }`}
         onClick={handleCloseAuthPopup}
       />
-      
+        <Toaster position='top-center' reverseOrder={false}/>
       </body>
     </html>
   )

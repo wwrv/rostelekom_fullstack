@@ -11,7 +11,7 @@ export const useAuthForm = (
     const spinner = useUnit(initialSpinner)
 
     const { register, 
-        formState: {errors}, 
+        formState: { errors }, 
         handleSubmit,
     } = useForm<IInputs>()
         

@@ -1,21 +1,23 @@
 'use client'
 import { useUnit } from 'effector-react'
+import { MutableRefObject, useRef } from 'react'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import Header from '../modules/Header/Header'
 import MobileNavbar from '../modules/MobileNavbar/MobileNavbar'
 import './../../app/globalStyles/mobile-navbar.css'
 import './../../app/globalStyles/catalog-menu.css'
-
 import './../../app/globalStyles/search-modal.css'
 import { AnimatePresence, motion } from 'framer-motion'
 import SearchModal from '../modules/Header/SearchModal'
 import { $searchModal, $showQuickViewModal, $showSizeTable, showQuickViewModal, showSizeTable } from '@/context/modals'
-import { handleCloseSearchModal } from '@/lib/utils/common'
+import { handleCloseAuthPopup, handleCloseSearchModal } from '@/lib/utils/common'
 import Footer from '../modules/Footer/Footer'
 import QuickViewModal from '../modules/QuickViewModal/QuickViewModal'
 import SizeTable from '../modules/SizeTable/SizeTable'
 import { $openAuthPopup, openAuthPopup } from '@/context/auth'
 import AuthPopup from '../modules/AuthPopup/AuthPopup'
+
+
 
 
 const Layout = ({ children }: {
@@ -26,6 +28,17 @@ const Layout = ({ children }: {
   const showQuickViewModal = useUnit($showQuickViewModal)
   const showSizeTable = useUnit($showSizeTable)
   const openAuthPopup = useUnit($openAuthPopup)
+  const authWrapperRef = useRef() as MutableRefObject<HTMLDivElement>
+
+  const handleCloseAuthPopupByTarget = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+    ) => {
+      const target = e.target as Element
+
+      if(target === authWrapperRef.current) {
+        handleCloseAuthPopup()
+      }
+    }
 
   return (
     <>
@@ -40,6 +53,8 @@ const Layout = ({ children }: {
               transition={{ duration: 0.3 }}
               exit={{ opacity: 0, scale: 0.5 }}
               className='auth-popup-wrapper'
+              onClick={handleCloseAuthPopupByTarget}
+              ref={authWrapperRef}
             >
               <AuthPopup />
             </motion.div>

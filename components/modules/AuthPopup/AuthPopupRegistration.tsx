@@ -1,8 +1,8 @@
 'use client'
-import {sign_up} from '@/api/auth'
-import { handleSignUp } from '@/context/auth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import {signUpFx} from '@/api/auth'
+import { handleSignUp } from '@/context/auth'
 import { useAuthForm } from '@/hooks/useAuthForm'
 import AuthPopupClose from './AuthPopupClose'
 import { IAuthSideProps, IInputs } from '@/types/authPopup'
@@ -17,8 +17,15 @@ const AuthPopupRegistration = ({
   isSideActive,
 }: IAuthSideProps) => {
   const { lang, translations } = useLang()
-  const { spinner, register, errors, handleSubmit, handleSignupWithOAuth } =
-    useAuthForm(sign_up.pending, isSideActive, handleSignUp)
+
+  const { 
+    spinner, 
+    register, 
+    errors, 
+    handleSubmit, 
+    handleSignupWithOAuth 
+  } =
+    useAuthForm(signUpFx.pending, isSideActive, handleSignUp)
 
   const submitForm = (data: IInputs) =>
     handleSignUp({
@@ -44,7 +51,11 @@ const AuthPopupRegistration = ({
           <PasswordInput register={register} errors={errors} />
           <div className='card-body__inner'>
             <div className='inner__top'>
-              <button className='inner__btn' type='submit' disabled={spinner}>
+              <button 
+                className='inner__btn' 
+                type='submit' 
+                disabled={spinner}
+              >
                 {spinner ? (
                   <FontAwesomeIcon icon={faSpinner} spin />
                 ) : (

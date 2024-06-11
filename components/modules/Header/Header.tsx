@@ -55,8 +55,10 @@ const Header = () => {
             <CartPopup />
         </li>
         <li className="header__links__item header__links__item--profile">
-            <button className="btn-reset header__links__item__btn header__links__item__btn--profile"
-            onClick={handleOpenAuthPopup}/>
+            <button 
+              className="btn-reset header__links__item__btn header__links__item__btn--profile"
+              onClick={handleOpenAuthPopup}
+            />
         </li>
       </ul>
       </div>

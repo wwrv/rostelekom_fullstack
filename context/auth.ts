@@ -1,5 +1,5 @@
 import { ISignUpFx } from "@/types/authPopup"
-import {sign_in, sign_up} from '@/api/auth'
+import {signInFx, signUpFx,} from '@/api/auth'
 import { createDomain, sample } from "effector";
 import toast from "react-hot-toast";
 
@@ -25,37 +25,37 @@ export const $isAuth = auth
 export const $auth = auth
     .createStore(false)
     
-    .on(sign_up.done, (_, { result }) => result)
-    .on(sign_up.fail, (_, { error }) => {
+    .on(signUpFx.done, (_, { result }) => result)
+    .on(signUpFx.fail, (_, { error }) => {
         toast.error(error.message)
     })
-    .on(sign_in.done, (_, { result }) => result)
-    .on(sign_in.fail, (_, { error }) => {
+    .on(signInFx.done, (_, { result }) => result)
+    .on(signInFx.fail, (_, { error }) => {
         toast.error(error.message)
     })
 
 sample({
     clock:handleSignUp,
     source: $auth,
-    fn:(_, { name,email, password, isOAuth }) => ({
+    fn:(_, { name, email, password, isOAuth }) => ({
         name,
         password,
         email,
         isOAuth
     }),
-    target: sign_up
+    target: signUpFx,
 })
 
 sample({
     clock: handleSignIn,
     source:$auth,
-    fn:(_, { name,email, password, isOAuth }) => ({
-        name,
-        password,
+    fn:(_, { name, email, password, isOAuth }) => ({
         email,
-        isOAuth
+        password,
+        isOAuth,
+        name,
     }),
-    target: sign_in
+    target: signInFx,
 })
 
 

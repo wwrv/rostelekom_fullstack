@@ -1,5 +1,5 @@
 'use client'
-import {sign_in} from '@/api/auth'
+import {signInFx} from '@/api/auth'
 import { handleSignIn} from '@/context/auth'
 import { useAuthForm } from '@/hooks/useAuthForm'
 import { IAuthSideProps, IInputs } from '@/types/authPopup'
@@ -13,8 +13,14 @@ import AuthPopupSocials from './AuthPopupSocials'
 
 const AuthPopupLogin = ({ toggleAuth, isSideActive }: IAuthSideProps) => {
   const { lang, translations } = useLang()
-  const { spinner, register, errors, handleSubmit, handleSignupWithOAuth } =
-    useAuthForm(sign_in.pending, isSideActive, handleSignIn)
+  const { 
+    spinner, 
+    register, 
+    errors, 
+    handleSubmit, 
+    handleSignupWithOAuth 
+  } =
+    useAuthForm(signInFx.pending, isSideActive, handleSignIn)
 
   const submitForm = (data: IInputs) =>
     handleSignIn({

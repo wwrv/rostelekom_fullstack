@@ -67,24 +67,27 @@ export const closeSizeTableByCheck = (showQuickViewModal: boolean) => {
   closeSizeTable()
 }
 
-export const handleCloseAuthPopup = () => {
-  removeOverFlowHiddenFromBody()
-  closeAuthPopup()
-}
 export const handleOpenAuthPopup = () => {
   addOverFlowHiddenFromBody()
   openAuthPopup()
+}
+
+export const handleCloseAuthPopup = () => {
+  removeOverFlowHiddenFromBody()
+  closeAuthPopup()
 }
 
 
 export const closeAuthPopupWhenSomeModalOpened = (
   showQuickViewModal: boolean,
   showSizeTable: boolean
-) => {
-  if (showQuickViewModal || showSizeTable) {
-    closeAuthPopup()
-    return
-  }
+  ) => {
+    if (showQuickViewModal || showSizeTable) {
+      closeAuthPopup()
+      return
+      }
+      
+      handleCloseAuthPopup()
+    }
+    
 
-  handleCloseAuthPopup()
-}
