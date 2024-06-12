@@ -7,8 +7,34 @@ import api from './apiInstance'
 const signUpPath = 'api/users/signup';
 const signInPath = 'api/users/login'
 
+export const oauthFx = createEffect(
+    async({ name, password, email }: ISignUpFx) => {
+        try{
+            const { data } = await api.post('/api/users/oauth', {
+                name,
+                password,
+                email,
+            })
+            onAuthSuccess('Авторизация выполнена!', data)
+            return data.user
+        }catch(error) {
+            toast.error((error as Error).message)
+        }
+    }
+)
+
+
 export const signUpFx = createEffect(
-    async ({ name, password, email }: ISignUpFx) =>{
+    async ({ name, password, email, isOAuth }: ISignUpFx) =>{
+        if(isOAuth){
+            await oauthFx({
+                email,
+                password,
+                name
+            })
+            return
+        }
+
         const { data } = await api.post(signUpPath, {
             name,
             password,
@@ -25,7 +51,14 @@ export const signUpFx = createEffect(
     }
 )
 
-export const signInFx = createEffect(async ({ email, password }: ISignUpFx) => {
+export const signInFx = createEffect(async ({ email, password, isOAuth }: ISignUpFx) => {
+    if(isOAuth){
+        await oauthFx({
+            email,
+            password,
+        })
+        return
+    }
     const { data } = await api.post(signInPath, { email, password })
 
     if (data.warningMessage) {
