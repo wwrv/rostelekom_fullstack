@@ -4,9 +4,12 @@ import { createEffect } from "effector";
 import toast from "react-hot-toast";
 import api from './apiInstance'
 
+const signUpPath = 'api/users/signup';
+const signInPath = 'api/users/login'
+
 export const signUpFx = createEffect(
     async ({ name, password, email }: ISignUpFx) =>{
-        const { data } = await api.post('api/users/signup', {
+        const { data } = await api.post(signUpPath, {
             name,
             password,
             email,
@@ -23,7 +26,7 @@ export const signUpFx = createEffect(
 )
 
 export const signInFx = createEffect(async ({ email, password }: ISignUpFx) => {
-    const { data } = await api.post('/api/users/login', { email, password })
+    const { data } = await api.post(signInPath, { email, password })
 
     if (data.warningMessage) {
         toast.error(data.warningMessage)

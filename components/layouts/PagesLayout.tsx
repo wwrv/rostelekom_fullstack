@@ -1,11 +1,11 @@
 'use client'
 
+import { useUnit } from "effector-react"
+import { Toaster } from "react-hot-toast"
 import { $showQuickViewModal, $showSizeTable, closeQuickViewModal, showQuickViewModal, showSizeTable } from "@/context/modals"
 import Layout from "./Layout"
-import { useUnit } from "effector-react"
 import { closeSizeTableByCheck, handleCloseAuthPopup, removeOverFlowHiddenFromBody } from "@/lib/utils/common"
 import { $openAuthPopup } from "@/context/auth"
-import { Toaster } from "react-hot-toast"
 
 const PageLayout = ({ children } : { children: React.ReactNode }) => {
   

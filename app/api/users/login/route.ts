@@ -19,7 +19,6 @@ export async function POST(req: Request) {
 
   if (!bcrypt.compareSync(reqBody.password, user.password)) {
     return NextResponse.json({
-
       warningMessage: 'Неправильный логин или пароль!',
     })
   }
