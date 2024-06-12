@@ -22,7 +22,6 @@ const PageLayout = ({ children } : { children: React.ReactNode }) => {
   const handleCloseSizeTable = () => closeSizeTableByCheck(showQuickViewModal)
     return (
       <>
-      { isClient && (
         <EarthoOneProvider domain="rostelecom" clientId={`${process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}`}>
         <html lang="en">
           <body>
@@ -41,7 +40,6 @@ const PageLayout = ({ children } : { children: React.ReactNode }) => {
           </body>
         </html>
         </EarthoOneProvider>
-      )}
       </>
   )
 }
