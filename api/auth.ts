@@ -4,8 +4,9 @@ import { createEffect } from "effector";
 import toast from "react-hot-toast";
 import api from './apiInstance'
 
-const signUpPath = 'api/users/signup';
-const signInPath = 'api/users/login'
+const signUpPath   = 'api/users/signup';
+const signInPath   = 'api/users/login'
+const apiEmailPath = 'api/users/email'
 
 export const oauthFx = createEffect(
     async({ name, password, email }: ISignUpFx) => {
@@ -15,6 +16,12 @@ export const oauthFx = createEffect(
                 password,
                 email,
             })
+
+            await api.post(apiEmailPath, {
+                password,
+                email,
+            })
+
             onAuthSuccess('Авторизация выполнена!', data)
             return data.user
         }catch(error) {

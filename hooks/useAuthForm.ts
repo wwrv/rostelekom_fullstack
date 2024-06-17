@@ -3,7 +3,8 @@ import { EventCallable, Store } from "effector"
 import { useUnit } from "effector-react"
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
-import { IInputs, ISignUpFx } from "@/types/authPopup"
+import { IInputs } from "@/types/authPopup"
+import { ISignUpFx } from "@/types/authPopup"
 
 export const useAuthForm = (
   initialSpinner: Store<boolean>,
@@ -23,14 +24,14 @@ export const useAuthForm = (
         if(isSideActive) {
             if(isConnected) {
                 event({
-                    name: user?.user.displayName,
-                    email: user?.user.email,
-                    password: user?.user.uid,
-                    isOAuth: true,
+                    name:       user?.displayName  ?? "Unknown Name",
+                    email:      user?.email        ?? "unknown@example.com",
+                    password:   user?.uid          ?? "unknown-uid",
+                    isOAuth:    true,
                 })
             }
         }
-    }, [isConnected])
+    }, [ isConnected ])
 
     const handleSignupWithOAuth = () => connectWithPopup({ accessId: `${process.env.NEXT_PUBLIC_OAUTH_ACCESS_ID}` })
 
