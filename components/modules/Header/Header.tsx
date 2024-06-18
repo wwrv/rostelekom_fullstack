@@ -4,7 +4,7 @@ import Link from "next/link"
 import { openMenu } from "@/context/modals"
 import { openSearchModall } from "@/context/modals"
 
-import { addOverFlowHiddenFromBody, handleOpenAuthPopup } from "@/lib/utils/common"
+import { addOverFlowHiddenFromBody, handleOpenAuthPopup, triggerLoginCheck } from "@/lib/utils/common"
 import { useLang } from "@/hooks/useLang"
 import Menu from "./Menu"
 import Logo from "@/components/elements/Logo/Logo"
@@ -16,15 +16,18 @@ import { useUnit } from "effector-react"
 import { $isAuth } from "@/context/auth"
 import { faSpinner } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { loginCheckFx } from "@/api/auth"
+import { useEffect } from "react"
+import { $user } from "@/context/user"
 
 
 const Header = () => {
   const isAuth = useUnit($isAuth)
-  const loginCheckSpinner = false
+  const loginCheckSpinner = useUnit(loginCheckFx.pending)
   const { lang, translations } = useLang();
+  const user = useUnit($user)
 
-
-  
+  console.log(user)
   const handlOpenMenu = () => {
     openMenu()
     addOverFlowHiddenFromBody()
@@ -33,6 +36,10 @@ const Header = () => {
     openSearchModall()
     addOverFlowHiddenFromBody()
   }
+
+  useEffect(() => {
+    triggerLoginCheck()
+  }, [])
 
   return (
     <header className="header">
