@@ -7,7 +7,7 @@ export async function POST(req: Request) {
     await sendMail(
       'Rostelecom',
       res.email,
-      `Ваши данные для входа - пароль: ${res.password}, логин: ${res.email}`
+      `Ваши данные для входа - логин: ${res.email}, пароль: ${res.password} `
     )
     return NextResponse.json({ message: 'Success' })
   } catch (err) {

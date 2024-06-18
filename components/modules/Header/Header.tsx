@@ -11,9 +11,16 @@ import Logo from "@/components/elements/Logo/Logo"
 
 import '../../../app/globalStyles/header.css'
 import CartPopup from "./CartPopup/CartPopup"
+import HeaderProfile from "./HeaderProfile"
+import { useUnit } from "effector-react"
+import { $isAuth } from "@/context/auth"
+import { faSpinner } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 
 const Header = () => {
+  const isAuth = useUnit($isAuth)
+  const loginCheckSpinner = false
   const { lang, translations } = useLang();
 
 
@@ -55,10 +62,16 @@ const Header = () => {
             <CartPopup />
         </li>
         <li className="header__links__item header__links__item--profile">
-            <button 
-              className="btn-reset header__links__item__btn header__links__item__btn--profile"
-              onClick={handleOpenAuthPopup}
-            />
+          {isAuth ? (
+              <HeaderProfile />
+            ) : loginCheckSpinner ? (
+              <FontAwesomeIcon icon={faSpinner} spin />
+            ) : (
+              <button
+                className='btn-reset header__links__item__btn header__links__item__btn--profile'
+                onClick={handleOpenAuthPopup}
+              />
+          )}
         </li>
       </ul>
       </div>

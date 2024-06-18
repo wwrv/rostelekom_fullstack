@@ -7,15 +7,3 @@ export interface IUser {
     role: string
   }
   
-  export interface IUserGeolocation {
-    features: [
-      {
-        properties: {
-          city: string
-          lon: number
-          lat: number
-        }
-        bbox: [number, number, number, number]
-      },
-    ]
-  }

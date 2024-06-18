@@ -10,6 +10,9 @@ import './globalStyles/footer.css'
 import './globalStyles/slick.css'
 import './globalStyles/slick-theme.css'
 import './globalStyles/auth-popup.css'
+import './globalStyles/header-profile.css'
+
+
 
 
 
