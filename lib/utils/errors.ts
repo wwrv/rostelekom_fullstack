@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import { loginCheckFx } from "@/api/auth"
 import { JWTError } from "@/constants/jwt"
-
+import { refreshTokenFX } from "@/api/auth"
 export const handleJWTError = async (
   errorName: string,
   repeatRequestAfterRefreshData?: {
@@ -11,8 +11,7 @@ export const handleJWTError = async (
 ) => {
   if (errorName === JWTError.EXPIRED_JWT_TOKEN) {
     const auth = JSON.parse(localStorage.getItem('auth') as string)
-    // const newTokens = await refreshTokenFx({ jwt: auth.refreshToken })
-    const newTokens = {accessToken: ''}
+    const newTokens = await refreshTokenFX({ jwt: auth.refreshToken })
 
     if(repeatRequestAfterRefreshData) {
         const { repeatRequestMethodName, payload } = repeatRequestAfterRefreshData;
@@ -20,11 +19,12 @@ export const handleJWTError = async (
         switch (repeatRequestMethodName) {
             case 'loginCheckFx':
                 await loginCheckFx({
-                    jwt:newTokens.accessToken,
-                })
+                  jwt: newTokens.accessToken,
+                }) 
                 break
             
         }
         }
     }
 }
+

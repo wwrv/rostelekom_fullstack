@@ -24,22 +24,22 @@ const PageLayout = ({ children } : { children: React.ReactNode }) => {
       <>
         
           <EarthoOneProvider domain="rostelecom" clientId={`${process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}`}>
-          <html lang="en">
-            <body>
-              <Layout>{ children }</Layout>
-            <div className={`quick-view-modal-overlay ${showQuickViewModal ? 'overlay-active' : '' } `}
-            onClick={handleCloseQuickViewModal}
-            />
-            <div className={`size-table-overlay ${showSizeTable ? 'overlay-active' : ''}`}
-            onClick={handleCloseSizeTable}
-            />
-            <div 
-              className={`auth-overlay ${openAuthPopup ? 'overlay-active' : '' }`}
-              onClick={handleCloseAuthPopup}
-            />
-              <Toaster position='top-center' reverseOrder={false}/>
-            </body>
-          </html>
+            <html lang="en">
+              <body>
+                <Layout>{ children }</Layout>
+              <div className={`quick-view-modal-overlay ${showQuickViewModal ? 'overlay-active' : '' } `}
+              onClick={handleCloseQuickViewModal}
+              />
+              <div className={`size-table-overlay ${showSizeTable ? 'overlay-active' : ''}`}
+              onClick={handleCloseSizeTable}
+              />
+              <div 
+                className={`auth-overlay ${openAuthPopup ? 'overlay-active' : '' }`}
+                onClick={handleCloseAuthPopup}
+              />
+                <Toaster position='top-center' reverseOrder={false}/>
+              </body>
+            </html>
           </EarthoOneProvider>
         
       </>
