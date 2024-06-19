@@ -223,3 +223,4 @@ export const deleteProduct = async (
 
   return NextResponse.json({ status: 204, id })
 }
+
