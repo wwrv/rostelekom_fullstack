@@ -1,8 +1,9 @@
 import toast from "react-hot-toast"
 import { ICartItem } from "@/types/cart"
 import { IProduct } from "@/types/common"
-import { idGenerator, isUserAuth } from "./common"
+import { handleShowSizeTable, idGenerator, isUserAuth } from "./common"
 import { addProductToCart, setCartFromLS } from '@/context/cart'
+import { productsWithoutSizes } from "@/constants/product"
 
 
 export const addItemToCart = (
@@ -12,12 +13,12 @@ export const addItemToCart = (
   selectedSize = ''
 ) => {
   if (!isUserAuth()) {
-    addCartItemToLs(product, selectedSize, count)
+    addCartItemToLS(product, selectedSize, count)
     return
   }
   const auth = JSON.parse(localStorage.getItem('auth') as string)
   
-  const clientId = addCartItemToLs(product, selectedSize, count, false)
+  const clientId = addCartItemToLS(product, selectedSize, count, false)
   addProductToCart({
     jwt: auth.accessToken,
     setSpinner,
@@ -31,7 +32,7 @@ export const addItemToCart = (
 
 
 
-export const addCartItemToLs = (
+export const addCartItemToLS = (
     product: IProduct,
     selectedSize = '',
     count: number,
@@ -67,24 +68,43 @@ export const addCartItemToLs = (
     }
 
 
-    const cart = [
-        ...cartFromLS,
-        {
-          clientId,
-          productId: product._id,
-          size: selectedSize,
-          count,
-          image: product.images[0],
-          name: product.name,
-          price: product.price,
-          inStock: product.inStock,
-          category: product.category,
-          color: product.characteristics.color,
-        },
-      ]
-      localStorage.setItem('cart', JSON.stringify(cart))
-      setCartFromLS(cart as ICartItem[])
-      withToast && toast.success('Добавлено в корзину!')
-    
-      return clientId
+  const cart = [
+      ...cartFromLS,
+      {
+        clientId,
+        productId: product._id,
+        size: selectedSize,
+        count,
+        image: product.images[0],
+        name: product.name,
+        price: product.price,
+        inStock: product.inStock,
+        category: product.category,
+        color: product.characteristics.color,
+      },
+    ]
+  localStorage.setItem('cart', JSON.stringify(cart))
+  setCartFromLS(cart as ICartItem[])
+  withToast && toast.success('Добавлено в корзину!')
+
+  return clientId
+}
+
+export const addProductToCartBySizeTable = (
+  product: IProduct,
+  setSpinner: (arg0: boolean) => void,
+  count: number,
+  selectedSize = ''
+) => {
+  if (productsWithoutSizes.includes(product.type)) {
+    addItemToCart(product, setSpinner, count)
+    return
+  }
+
+  if (selectedSize) {
+    addItemToCart(product, setSpinner, count, selectedSize)
+    return
+  }
+
+  handleShowSizeTable(product)
 }

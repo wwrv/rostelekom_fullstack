@@ -1,6 +1,10 @@
 import { closeAuthPopup, openAuthPopup, setIsAuth } from '@/context/auth';
-import { closeSearchModal, closeSizeTable, showQuickViewModal } from '@/context/modals'
+import { setCurrentProduct } from '@/context/goods';
+import { closeSearchModal, closeSizeTable, showQuickViewModal, showSizeTable } from '@/context/modals'
+import { setSizeTableSizes } from '@/context/sizeTable';
 import { loginCheck } from '@/context/user';
+import { ICartItem } from '@/types/cart';
+import { IProduct } from '@/types/common';
 
 export const removeOverFlowHiddenFromBody = () => {
     const body = document.querySelector('body') as HTMLBodyElement
@@ -11,6 +15,11 @@ export const addOverFlowHiddenFromBody = ( paddingRight = '') => {
     const body = document.querySelector('body') as HTMLBodyElement
     body.classList.add('overflow-hidden')
     paddingRight && (body.style.paddingRight = paddingRight)
+}
+export const addOverflowHiddenToBody = (paddingRight = '') => {
+  const body = document.querySelector('body') as HTMLBodyElement
+  body.classList.add('overflow-hidden')
+  paddingRight && (body.style.paddingRight = paddingRight)
 }
 
 export const getWindowWidth = () => {
@@ -107,4 +116,15 @@ export const triggerLoginCheck = () => {
   }
   const auth = JSON.parse(localStorage.getItem('auth') as string)
   loginCheck({ jwt: auth.accessToken })
+}
+
+export const isItemInList = (array: ICartItem[], productId: string) =>
+  array.some((item) => item.productId === productId)
+
+
+export const handleShowSizeTable = (product: IProduct) => {
+  setCurrentProduct(product)
+  setSizeTableSizes({ sizes: product.sizes, type: product.type })
+  addOverflowHiddenToBody()
+  showSizeTable()
 }
