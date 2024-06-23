@@ -6,6 +6,7 @@ import styles from '@/styles/size-table/index.module.scss'
 import { $showQuickViewModal } from "@/context/modals";
 import { useLang } from "@/hooks/useLang";
 import AddToCartBtn from "../ProductListItem/AddToCartBtn";
+import ProductCountBySize from "../ProductListItem/ProductCountBySize";
 const SizeTable = () => {
     const { lang, translations } = useLang()
     const showQuickViewModal = useUnit($showQuickViewModal)
@@ -14,9 +15,11 @@ const SizeTable = () => {
     const [ lSize, setLSize ] = useState(false);
     const [ xlSize, setXLSize ] = useState(false);
     const [ xxlSize, setXXLSize ] = useState(false);
-    const { selectedSize, setSelectedSize, product} = useCartAction()
+    const { selectedSize, setSelectedSize, handleAddToCart, cartItemBySize, addToCartSpinner, currentCartItems } = useCartAction(true)
     const productSizes = useUnit($sizeTableSizes)
     const isHeaddressType = productSizes.type === 'headdress'
+    const isAnySizeSelected = 
+      sSize || lSize || mSize || xlSize || xxlSize || selectedSize
     
     const handleSelectSSize = () => {
         setSelectedSize('s')
@@ -167,9 +170,11 @@ const SizeTable = () => {
           isAvailable: productSizes.sizes.xxl,
           isInFavorites: false,
         },
-      ]
+    ]
     
     const handleCloseSizeTable = () => closeSizeTableByCheck(showQuickViewModal)
+
+    const addToCart = () => handleAddToCart(+(cartItemBySize?.count || 1))
 
     const trProps = (
         item:
@@ -237,7 +242,13 @@ const SizeTable = () => {
                         ? headdressSizes.map((headdressSizesItem)=> (
                             <tr key = {headdressSizesItem.id} {...(trProps(headdressSizesItem) as React.HTMLAttributes<HTMLTableRowElement>)}>
                                 <td>{headdressSizesItem.headCircumference}</td>
-                                <td>{headdressSizesItem.manufacturerSize}</td>
+                                <td>
+                                  <ProductCountBySize
+                                    size={headdressSizesItem.manufacturerSize}
+                                    products={currentCartItems} 
+                                  />
+                                  {headdressSizesItem.manufacturerSize}
+                                </td>
                             </tr>
                         ))
                         : dressSizes.map((item) => (
@@ -246,7 +257,13 @@ const SizeTable = () => {
                                <td>{item.manufacturerSize}</td>
                                <td>{item.bust}</td>
                                <td>{item.waist}</td>
-                               <td>{item.hipGirth}</td>
+                               <td>
+                                <ProductCountBySize
+                                  size={item.manufacturerSize}
+                                  products={currentCartItems} 
+                                />
+                                {item.hipGirth}
+                              </td>
                             </tr>
                         ))
                     }
@@ -254,7 +271,11 @@ const SizeTable = () => {
             </table>
         </div>
       <AddToCartBtn
+        minWidth={172}
         className={styles.size_table__btn}
+        handleAddToCart={addToCart}
+        addToCartSpinner={addToCartSpinner}
+        btnDisabled={!isAnySizeSelected || addToCartSpinner}
         text={translations[lang].product.to_cart}
       />
     </div>

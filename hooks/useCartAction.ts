@@ -62,6 +62,6 @@ export const useCartAction = (isSizeTable = false) => {
         currentCartByAuth, 
         setSelectedSize, 
         handleAddToCart, 
-        setAddToCartSpinner,
+        setAddToCartSpinner,   
     }
 }

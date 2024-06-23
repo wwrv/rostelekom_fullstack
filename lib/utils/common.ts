@@ -128,3 +128,10 @@ export const handleShowSizeTable = (product: IProduct) => {
   addOverflowHiddenToBody()
   showSizeTable()
 }
+
+export const getCartItemCountBySize = (
+  cartItems: ICartItem[],
+  currentSize: string
+) => 
+  cartItems.find((item) => item.size === currentSize.toLocaleLowerCase())
+  ?.count || 0
