@@ -92,6 +92,7 @@
       }
   
       &__cart {
+        background-color: #9466FF !important;
         opacity: 0;
         visibility: hidden;
         position: absolute;
@@ -101,7 +102,6 @@
         font-size: 16px;
         font-weight: 500;
         border-radius: 32px;
-        background-color: #9466FF;
         padding: 12px 24px !important;
         transition: background-color .2s ease-in-out, opacity .2s ease-in-out, visibility .2s ease-in-out;
   
@@ -115,19 +115,19 @@
         }
   
         &:hover {
-          background-color: #70F;
+          background-color: #70F !important;
           transition: background-color .2s ease-in-out;
         }
   
         &_added {
-          opacity: 1;
-          visibility: visible;
           background-color: #16D9A6 !important;
+          opacity: 1 !important;
+          visibility: visible !important;
           pointer-events: none !important;
           cursor: none !important;
   
           &:hover {
-            background-color: #16D9A6;
+            background-color: #091f19;
           }
         }
   

@@ -19,6 +19,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { loginCheckFx } from "@/api/auth"
 import { useEffect } from "react"
 import { $user } from "@/context/user"
+import { useCartByAuth } from "@/hooks/useCartByAuth"
 
 
 const Header = () => {
@@ -26,8 +27,9 @@ const Header = () => {
   const loginCheckSpinner = useUnit(loginCheckFx.pending)
   const { lang, translations } = useLang();
   const user = useUnit($user)
+  const currentCartByAuth = useCartByAuth()
+  console.log(currentCartByAuth)
 
-  console.log(user)
   const handlOpenMenu = () => {
     openMenu()
     addOverFlowHiddenFromBody()
