@@ -7,7 +7,6 @@ const AddToCartBtn = ({
     addToCartSpinner,
     text,
     btnDisabled = false,
-    minWidth,
     className,    
  }: IAddToCartBtnProps) => (
     <button

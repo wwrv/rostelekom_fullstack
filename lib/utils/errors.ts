@@ -3,7 +3,8 @@ import { loginCheckFx } from "@/api/auth"
 import { JWTError } from "@/constants/jwt"
 import { refreshTokenFX } from "@/api/auth"
 import { addProductToCartFx, getCartItemFx } from "@/api/cart"
-import { IAddProductToCartFx } from "@/types/cart"
+import { IAddProductToCartFx, IAddProductsFromLSToCartFx } from "@/types/cart"
+import { addProductsFromLSToCartFx } from "@/context/cart"
 export const handleJWTError = async (
   errorName: string,
   repeatRequestAfterRefreshData?: {
@@ -30,8 +31,12 @@ export const handleJWTError = async (
               ...(payload as IAddProductToCartFx),
               jwt: newTokens.accessToken,
             })
-            
-          case 'loginCheckFx':
+            case 'addProductsFromLSToCartFx':
+              return addProductsFromLSToCartFx({
+                ...(payload as IAddProductsFromLSToCartFx),
+                jwt: newTokens.accessToken,
+              })
+            case 'loginCheckFx':
               await loginCheckFx({
                 jwt: newTokens.accessToken,
               }) 

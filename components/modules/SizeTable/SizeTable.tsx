@@ -10,12 +10,20 @@ import ProductCountBySize from "../ProductListItem/ProductCountBySize";
 const SizeTable = () => {
     const { lang, translations } = useLang()
     const showQuickViewModal = useUnit($showQuickViewModal)
-    const [ sSize, setSSize ] = useState(false);
-    const [ mSize, setMSize ] = useState(false);
-    const [ lSize, setLSize ] = useState(false);
-    const [ xlSize, setXLSize ] = useState(false);
+    const [ sSize, setSSize ]     = useState(false);
+    const [ mSize, setMSize ]     = useState(false);
+    const [ lSize, setLSize ]     = useState(false);
+    const [ xlSize, setXLSize ]   = useState(false);
     const [ xxlSize, setXXLSize ] = useState(false);
-    const { selectedSize, setSelectedSize, handleAddToCart, cartItemBySize, addToCartSpinner, currentCartItems } = useCartAction(true)
+    const { 
+      handleAddToCart, 
+      setSelectedSize,
+      selectedSize, 
+      cartItemBySize, 
+      currentCartItems,
+      addToCartSpinner, 
+      updateCountSpinner, 
+    } = useCartAction(true)
     const productSizes = useUnit($sizeTableSizes)
     const isHeaddressType = productSizes.type === 'headdress'
     const isAnySizeSelected = 
@@ -271,11 +279,10 @@ const SizeTable = () => {
             </table>
         </div>
       <AddToCartBtn
-        minWidth={172}
         className={styles.size_table__btn}
         handleAddToCart={addToCart}
-        addToCartSpinner={addToCartSpinner}
-        btnDisabled={!isAnySizeSelected || addToCartSpinner}
+        addToCartSpinner={addToCartSpinner || updateCountSpinner}
+        btnDisabled={!isAnySizeSelected || addToCartSpinner || updateCountSpinner}
         text={translations[lang].product.to_cart}
       />
     </div>

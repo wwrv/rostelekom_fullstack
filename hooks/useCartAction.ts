@@ -4,6 +4,7 @@ import { useCartByAuth } from "./useCartByAuth"
 import { isItemInList, isUserAuth } from "@/lib/utils/common"
 import { addCartItemToLS, addItemToCart, addProductToCartBySizeTable } from "@/lib/utils/cart"
 import { $currentProduct } from "@/context/goods"
+import { updateCartItemCount } from "@/context/cart"
 
 export const useCartAction = (isSizeTable = false) => {
     const product = useUnit($currentProduct)
@@ -17,6 +18,7 @@ export const useCartAction = (isSizeTable = false) => {
     )
     const isProductInCart = isItemInList(currentCartByAuth, product._id)
     const [ addToCartSpinner, setAddToCartSpinner ] = useState(false)
+    const [ updateCountSpinner, setUpdateCountSpinner] = useState(false)
     const handleAddToCart = (countFromCounter?: number ) => {
         if (isProductInCart) {
             if (!isUserAuth()) {
@@ -30,6 +32,13 @@ export const useCartAction = (isSizeTable = false) => {
                         ?countFromCounter
                         : +cartItemBySize.count + 1
                     : +cartItemBySize.count + 1
+
+                updateCartItemCount({
+                    jwt: auth.accessToken,
+                    id: cartItemBySize._id as string,
+                    setSpinner: setUpdateCountSpinner,
+                    count,
+                })
 
                 addCartItemToLS(product, selectedSize, count)
                 return
@@ -60,6 +69,7 @@ export const useCartAction = (isSizeTable = false) => {
         addToCartSpinner, 
         currentCartItems, 
         currentCartByAuth, 
+        updateCountSpinner,
         setSelectedSize, 
         handleAddToCart, 
         setAddToCartSpinner,   

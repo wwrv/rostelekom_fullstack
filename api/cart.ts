@@ -1,4 +1,4 @@
-import { IAddProductToCartFx } from './../types/cart';
+import { IAddProductToCartFx, IUpdateCartItemCountFx } from './../types/cart';
 import { handleJWTError } from "@/lib/utils/errors";
 import { ICartItem } from "@/types/cart";
 import { createEffect } from "effector";
@@ -52,3 +52,33 @@ export const addProductToCartFx = createEffect(
         }
     }
 ) 
+
+export const updateCartItemCountFx = createEffect(
+    async({ jwt, id, setSpinner, count }: IUpdateCartItemCountFx) => {
+        try{
+            setSpinner(true)
+            const { data } = await api.patch(
+                `/api/cart/count?id=${id}`,
+                { count },
+                {
+                    headers: { Authorization: `Bearer ${ jwt }` },
+                }
+            )
+            if(data?.error){
+                const newData: { count: string, id: string } = await handleJWTError(
+                    data.error.name,
+                    {
+                        repeatRequestMethodName: 'updateCartItemCountFx',
+                        payload: { id,setSpinner, count }
+                    }
+                )
+                return newData
+            }
+            return data
+        }catch (error) {
+            toast.error((error as Error).message)
+        }finally {
+            setSpinner(false)
+        }
+    }
+)
