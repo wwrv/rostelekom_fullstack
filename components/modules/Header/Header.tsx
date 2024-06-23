@@ -20,6 +20,8 @@ import { loginCheckFx } from "@/api/auth"
 import { useEffect } from "react"
 import { $user } from "@/context/user"
 import { useCartByAuth } from "@/hooks/useCartByAuth"
+import { setCartFromLS } from "@/context/cart"
+import { setLang } from "@/context/lang"
 
 
 const Header = () => {
@@ -40,6 +42,18 @@ const Header = () => {
   }
 
   useEffect(() => {
+    const lang = JSON.parse(localStorage.getItem('lang') as string)
+    const cart = JSON.parse(localStorage.getItem('cart') as string)
+
+    if(lang) {
+      if(lang === 'ru' || lang === 'eu'){
+        setLang(lang)
+      }
+    }
+
+    if(cart) {
+      setCartFromLS(cart)
+    }
     triggerLoginCheck()
   }, [])
 
