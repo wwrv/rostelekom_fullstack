@@ -45,7 +45,7 @@ export const useCartAction = (isSizeTable = false) => {
                 count: selectedSize.length ? updatedCountWithSize : +existingItem.count + 1,
             })
 
-            addCartItemToLS(product, selectedSize, count)
+            addCartItemToLS(product, selectedSize, countFromCounter || 1)
             return
             
         }
