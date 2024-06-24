@@ -12,15 +12,24 @@ import { useLang } from '@/hooks/useLang'
 import ProductSizeTableBtn from '../ProductListItem/ProductSizeTableBtn'
 import ProductSizesItem from '../ProductListItem/ProductSizesItem'
 import ProductCounter from '../ProductListItem/ProductCounter'
-import AddToCartBtn from '../ProductListItem/AddToCartBtn'
 import Link from 'next/link'
 import stylesForProduct from '@/styles/product-list-item/index.module.scss'
+import AddToCartBtn from '../ProductListItem/AddToCartBtn'
 
 
 
 const QuickViewModal = () => {
   const { lang, translations } = useLang()
-  const { product, selectedSize, setSelectedSize } = useCartAction()
+  const { 
+    product, 
+    selectedSize, 
+    setSelectedSize, 
+    cartItemBySize, 
+    handleAddToCart, 
+    addToCartSpinner, 
+    updateCountSpinner, 
+    allCurrentCartItemCount,
+  } = useCartAction()
   const images = useProductImages(product)
 
 
@@ -28,6 +37,9 @@ const QuickViewModal = () => {
     removeOverFlowHiddenFromBody()
     closeQuickViewModal()
   }
+
+  const addToCart = () => handleAddToCart(+(cartItemBySize?.count || 1))
+
   return (
     <div className={styles.modal}>
       <button className={`btn-reset ${styles.modal__close}`} onClick={handleCloseModal}/>
@@ -101,6 +113,13 @@ const QuickViewModal = () => {
             <AddToCartBtn
               className={styles.modal__right__bottom__add}
               text={translations[lang].product.to_cart} 
+              handleAddToCart={addToCart}
+              addToCartSpinner={addToCartSpinner || updateCountSpinner}
+              btnDisabled={
+                addToCartSpinner ||
+                updateCountSpinner ||
+                allCurrentCartItemCount === +product.inStock
+              }
             />
           </div>
         </div>

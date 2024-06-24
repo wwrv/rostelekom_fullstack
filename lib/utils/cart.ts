@@ -47,20 +47,22 @@ export const addCartItemToLS = (
     cartFromLS = []
     }
 
-    // setShouldShowEmpty(false)
 
     const existingItem = cartFromLS.find(
         (item) => item.productId === product._id && item.size === selectedSize
       )
     
     if (existingItem) {
-       const updateCount = existingItem.count !== count ? count : +existingItem.count + 1
-
-       const updatedCart = cartFromLS.map((item) =>
-           item.productId === existingItem.productId && item.size === selectedSize
-             ? { ...existingItem, count: updateCount }
-             : item
-        )
+      const updatedCountWithSize = existingItem.count !== count ? count : +existingItem.count + 1
+      const updatedCart = cartFromLS.map((item) => item.productId === existingItem.productId && item.size === selectedSize 
+      ? {
+        ...existingItem,
+        count: selectedSize.length
+          ? updatedCountWithSize
+          : +existingItem.count + 1,
+      }
+      : item
+    )
     localStorage.setItem('cart', JSON.stringify(updatedCart))
     setCartFromLS(updatedCart)
     toast.success('Добавлено в корзину!')
