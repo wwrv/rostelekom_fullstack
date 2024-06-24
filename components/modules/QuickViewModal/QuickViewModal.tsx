@@ -15,13 +15,17 @@ import ProductCounter from '../ProductListItem/ProductCounter'
 import Link from 'next/link'
 import stylesForProduct from '@/styles/product-list-item/index.module.scss'
 import AddToCartBtn from '../ProductListItem/AddToCartBtn'
+import { ICartItem } from '@/types/cart'
 
 
 
 const QuickViewModal = () => {
   const { lang, translations } = useLang()
   const { 
+    count,
     product, 
+    setCount,
+    existingItem,
     selectedSize, 
     cartItemBySize, 
     setSelectedSize, 
@@ -100,7 +104,12 @@ const QuickViewModal = () => {
             {!!selectedSize ? (
               <ProductCounter 
                 className={`counter ${styles.modal__right__bottom__counter}`}
-                count={0} 
+                count={count} 
+                totalCount={+product.inStock}
+                initialCount={+(existingItem?.count || 1)}
+                setCount={setCount}
+                cartItem={existingItem as ICartItem}
+                updateCountAsync={false}
               />
             ): (
               <div className={`counter ${styles.modal__right__bottom__counter}`}
