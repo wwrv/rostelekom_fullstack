@@ -116,7 +116,8 @@ const QuickViewModal = () => {
               style={{justifyContent: 'center'}}
               >
                <span>
-                {translations[lang].product.total_in_cart} 0 
+                {translations[lang].product.total_in_cart}{' '} 
+                {allCurrentCartItemCount} 
               </span> 
               </div>
             )}
