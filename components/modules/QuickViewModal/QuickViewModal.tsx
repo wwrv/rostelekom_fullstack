@@ -43,7 +43,7 @@ const QuickViewModal = () => {
     closeQuickViewModal()
   }
 
-  const addToCart = () => handleAddToCart(+(cartItemBySize?.count || 1))
+  const addToCart = () => handleAddToCart(count)
 
   return (
     <div className={styles.modal}>
