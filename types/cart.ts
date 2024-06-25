@@ -35,3 +35,9 @@ export interface IUpdateCartItemCountFx {
   setSpinner: (arg0: boolean) => void
   count: number
 }
+
+export interface IDeleteCartItemBtnProps{
+  btnDisabled: boolean
+  callback: VoidFunction
+  className?: string
+}
