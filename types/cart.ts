@@ -29,10 +29,7 @@ export interface IAddProductsFromLSToCartFx{
   jwt: string
   cartItems:ICartItem[]
 }
-export interface IUpdateCartItemCountFx {
-  jwt: string
-  id: string
-  setSpinner: (arg0: boolean) => void
+export interface IUpdateCartItemCountFx extends IBaseEffectProps{
   count: number
 }
 
@@ -41,3 +38,5 @@ export interface IDeleteCartItemBtnProps{
   callback: VoidFunction
   className?: string
 }
+
+export type IDeleteCartItemsFx = IBaseEffectProps

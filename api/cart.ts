@@ -1,4 +1,4 @@
-import { IAddProductToCartFx, IUpdateCartItemCountFx } from './../types/cart';
+import { IAddProductToCartFx, IDeleteCartItemsFx, IUpdateCartItemCountFx } from './../types/cart';
 import { handleJWTError } from "@/lib/utils/errors";
 import { ICartItem } from "@/types/cart";
 import { createEffect } from "effector";
@@ -78,6 +78,30 @@ export const updateCartItemCountFx = createEffect(
         }catch (error) {
             toast.error((error as Error).message)
         }finally {
+            setSpinner(false)
+        }
+    }
+)
+
+export const deleteCartItemFx = createEffect(
+    async({ jwt, id, setSpinner }: IDeleteCartItemsFx) => {
+        try{
+            setSpinner(true)
+            const { data } = await api.delete(`/api/cart/delete?id=${id}`, {
+                headers: { Authorization: `Bearer ${jwt}`},
+            })
+            if(data?.error){
+                const newData: { id: string } = await handleJWTError(data.error.name, {
+                    repeatRequestMethodName: 'deleteCartItemFx',
+                    payload: { id, setSpinner },
+                })
+                return newData
+            }
+            toast.success('Удалено из корзины!')
+            return data
+        }catch(error){
+            toast.error((error as Error).message)
+        }finally{
             setSpinner(false)
         }
     }

@@ -2,8 +2,8 @@
 import { loginCheckFx } from "@/api/auth"
 import { JWTError } from "@/constants/jwt"
 import { refreshTokenFX } from "@/api/auth"
-import { addProductToCartFx, getCartItemFx } from "@/api/cart"
-import { IAddProductToCartFx, IAddProductsFromLSToCartFx } from "@/types/cart"
+import { addProductToCartFx, deleteCartItemFx, getCartItemsFx } from "@/api/cart"
+import { IAddProductToCartFx, IAddProductsFromLSToCartFx, IDeleteCartItemsFx } from "@/types/cart"
 import { addProductsFromLSToCartFx } from "@/context/cart"
 export const handleJWTError = async (
   errorName: string,
@@ -22,7 +22,7 @@ export const handleJWTError = async (
         switch (repeatRequestMethodName) {
 
           case 'getCartItemsFx':
-            return getCartItemFx({
+            return getCartItemsFx({
               jwt: newTokens.accessToken
             })
 
@@ -34,6 +34,11 @@ export const handleJWTError = async (
             case 'addProductsFromLSToCartFx':
               return addProductsFromLSToCartFx({
                 ...(payload as IAddProductsFromLSToCartFx),
+                jwt: newTokens.accessToken,
+              })
+            case 'deleteCartItemFx':
+              return deleteCartItemFx({
+                ...(payload as IDeleteCartItemsFx),
                 jwt: newTokens.accessToken,
               })
             case 'loginCheckFx':

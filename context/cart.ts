@@ -1,9 +1,16 @@
-import { addProductToCartFx, updateCartItemCountFx } from "@/api/cart";
-import { handleJWTError } from "@/lib/utils/errors";
-import { IAddProductToCartFx, IAddProductsFromLSToCartFx, ICartItem, IUpdateCartItemCountFx } from "@/types/cart";
-import { createDomain, createEffect, createStore, sample } from "effector";
-import toast from "react-hot-toast";
-import api from '../api/apiInstance'
+import { IAddProductToCartFx, 
+    IAddProductsFromLSToCartFx, 
+    ICartItem, 
+    IDeleteCartItemsFx, 
+    IUpdateCartItemCountFx 
+}                                                                                             from "@/types/cart";
+import { addProductToCartFx, deleteCartItemFx, updateCartItemCountFx }                        from "@/api/cart";
+import { handleJWTError }                                                                     from "@/lib/utils/errors";
+import { createDomain, createEffect, createStore, sample }                                    from "effector";
+import toast                                                                                  from "react-hot-toast";
+import api                                                                                    from '../api/apiInstance'
+
+
 const cart = createDomain()
 
 export const addProductsFromLSToCartFx = createEffect(
@@ -41,6 +48,8 @@ export const addProductToCart          = cart.createEvent<IAddProductToCartFx>()
 export const addProductsFromLSToCart   = cart.createEvent<IAddProductsFromLSToCartFx>()
 export const updateCartItemCount       = cart.createEvent<IUpdateCartItemCountFx>()
 export const setTotalPrice             = cart.createEvent<number>()
+export const deleteProductFromCart     = cart.createEvent<IDeleteCartItemsFx>()
+
 
 
 export const $cart = cart
@@ -52,11 +61,14 @@ export const $cart = cart
             
         ).values(),
     ])
-        .on(updateCartItemCountFx.done, (cart, { result }) => 
-            cart.map((item) =>
-                item._id === result.id ? { ...item, count: result.count } : item
-            )
+    .on(updateCartItemCountFx.done, (cart, { result }) => 
+        cart.map((item) =>
+            item._id === result.id ? { ...item, count: result.count } : item
         )
+    )
+    .on(deleteCartItemFx.done, (cart, { result }) => {
+        cart.filter((item) => item._id !== result.id)
+    })
 
 export const $cartFromLs = cart 
     .createStore<ICartItem[]>([])
@@ -87,4 +99,10 @@ sample({
     source: $cart,
     fn:(_, data) => data,
     target: updateCartItemCountFx,
+})
+sample({
+    clock: deleteProductFromCart,
+    source: $cart,
+    fn:(_, data) => data,
+    target: deleteCartItemFx,
 })
