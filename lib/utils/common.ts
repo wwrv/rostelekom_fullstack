@@ -146,15 +146,15 @@ export const deleteProductFromLS = <T>(
   message: string,
   withToast = true
 ) => {
-  let items = JSON.parse(localStorage.getItem(key) as string)
+  let items = JSON.parse(localStorage.getItem(key) as string);
 
   if (!items) {
     items = []
   }
-  const updateItems = items.filter(
+  const updatedItems = items.filter(
     (item: { clientId: string }) => item.clientId !== id
   )
-  localStorage.setItem(key, JSON.stringify(updateItems))
-  event(updateItems)
+  localStorage.setItem(key, JSON.stringify(updatedItems))
+  event(updatedItems)
   withToast && toast.success(message)
 }

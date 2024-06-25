@@ -24,6 +24,7 @@ const CartPopupItem = ({ item }: { item: ICartItem }) => {
       <DeleteItemBtn
         btnDisabled={deleteSpinner}
         callback={handleDeleteCartItem}
+        
       />
       <div className='cart-list__item__img'>
         <Image src={item.image} alt={item.name} width={96} height={96} />

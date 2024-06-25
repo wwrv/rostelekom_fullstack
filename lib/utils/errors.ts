@@ -36,11 +36,11 @@ export const handleJWTError = async (
                 ...(payload as IAddProductsFromLSToCartFx),
                 jwt: newTokens.accessToken,
               })
-            case 'deleteCartItemFx':
-              return deleteCartItemFx({
-                ...(payload as IDeleteCartItemsFx),
-                jwt: newTokens.accessToken,
-              })
+              case 'deleteCartItemFx':
+                return deleteCartItemFx({
+                  ...(payload as IDeleteCartItemsFx),
+                  jwt: newTokens.accessToken,
+                })
             case 'loginCheckFx':
               await loginCheckFx({
                 jwt: newTokens.accessToken,

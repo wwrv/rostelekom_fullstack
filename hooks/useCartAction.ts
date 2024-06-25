@@ -30,6 +30,7 @@ export const useCartAction = (isSizeTable = false) => {
                 addCartItemToLS(product, selectedSize, countFromCounter || 1)
                 return
             }
+           
             
             const auth = JSON.parse(localStorage.getItem('auth') as string)
             const updatedCountWithSize = !!countFromCounter 

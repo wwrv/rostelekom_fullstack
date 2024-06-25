@@ -66,9 +66,9 @@ export const $cart = cart
             item._id === result.id ? { ...item, count: result.count } : item
         )
     )
-    .on(deleteCartItemFx.done, (cart, { result }) => {
+    .on(deleteCartItemFx.done, (cart, { result }) =>
         cart.filter((item) => item._id !== result.id)
-    })
+      )
 
 export const $cartFromLs = cart 
     .createStore<ICartItem[]>([])
