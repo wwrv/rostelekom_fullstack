@@ -68,7 +68,7 @@ export const $cart = cart
     )
     .on(deleteCartItemFx.done, (cart, { result }) =>
         cart.filter((item) => item._id !== result.id)
-      )
+    )
 
 export const $cartFromLs = cart 
     .createStore<ICartItem[]>([])
