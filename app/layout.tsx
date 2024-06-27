@@ -11,7 +11,7 @@ import './globalStyles/slick-theme.css'
 import './globalStyles/auth-popup.css'
 import './globalStyles/header-profile.css'
 import './globalStyles/cart-popup.css'
-
+import './globalStyles/cookie-popup.css'
 
 
 
