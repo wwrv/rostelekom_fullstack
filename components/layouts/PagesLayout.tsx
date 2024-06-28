@@ -1,16 +1,16 @@
 'use client'
 
-import { useUnit } from "effector-react"
-import { Toaster } from "react-hot-toast"
-import { EarthoOneProvider } from '@eartho/one-client-react'
+import { useUnit }                                                                                     from "effector-react"
+import { Toaster }                                                                                     from "react-hot-toast"
+import { EarthoOneProvider }                                                                           from '@eartho/one-client-react'
 import { $showQuickViewModal, $showSizeTable, closeQuickViewModal, showQuickViewModal, showSizeTable } from "@/context/modals"
-import Layout from "./Layout"
-import { closeSizeTableByCheck, handleCloseAuthPopup, removeOverFlowHiddenFromBody } from "@/lib/utils/common"
-import { $openAuthPopup } from "@/context/auth"
-import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
-import CookieAlert from "../modules/CookieAlert/CookieAlert"
-
+import Layout                                                                                          from "./Layout"
+import { closeSizeTableByCheck, handleCloseAuthPopup, removeOverFlowHiddenFromBody }                   from "@/lib/utils/common"
+import { $openAuthPopup }                                                                              from "@/context/auth"
+import { useEffect, useState }                                                                         from "react"
+import { motion }                                                                                      from "framer-motion"
+import CookieAlert                                                                                     from "../modules/CookieAlert/CookieAlert"
+import { Next13ProgressBar }                                                                           from 'next13-progressbar'
 const PageLayout = ({ children } : { children: React.ReactNode }) => {
   const [ isClient, setIsClient ]           = useState(false)
   const [cookieAlertOpen, setCookieAlertOpen] = useState(false)
@@ -34,12 +34,14 @@ const PageLayout = ({ children } : { children: React.ReactNode }) => {
       <EarthoOneProvider domain="rostelecom" clientId={`${process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}`}>
         <html lang="en">
           <body>
-            <Layout>{ children }</Layout>
+            <Next13ProgressBar height='4px' color='#9466FF' showOnShallow />
+          <Layout>{ children }</Layout>
           <div className={`quick-view-modal-overlay ${showQuickViewModal ? 'overlay-active' : '' } `}
           onClick={handleCloseQuickViewModal}
           />
-          <div className={`size-table-overlay ${showSizeTable ? 'overlay-active' : ''}`}
-          onClick={handleCloseSizeTable}
+          <div 
+            className={`size-table-overlay ${showSizeTable ? 'overlay-active' : ''}`}
+            onClick={handleCloseSizeTable}
           />
           <div 
             className={`auth-overlay ${openAuthPopup ? 'overlay-active' : '' }`}
