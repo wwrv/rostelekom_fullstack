@@ -21,12 +21,18 @@ const CartPopup = forwardRef<HTMLDivElement, IWrappedComponentProps>(
         const spinner                = useUnit(getCartItemsFx.pending)
         const currentCartByAuth      = useCartByAuth()
         const { animatedPrice }      = useTotalPrice()
+
+
+
         return (
             <div className="cart-popup" ref={ref}>
-                <Link 
-                    href='/cart' className="header__links__item__btn header__links__item__btn--cart" 
+                <Link
+                    className='header__links__item__btn header__links__item__btn--cart'
+                    href='/cart'
                     onMouseEnter={handleShowPopup}
-                />
+                >
+                    {!!currentCartByAuth.length && <span className='not-empty' />}
+                </Link>
                 <AnimatePresence>
                     {open && (
                         <motion.div 
