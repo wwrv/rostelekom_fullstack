@@ -3,6 +3,7 @@ import { getCartItemsFx } from '@/api/cart'
 import HeadingWithCount              from '@/components/elements/HeadingWithCount/HeadingWithCount'
 import Breadcrumbs                   from '@/components/modules/Breadcrumbs/Breadcrumbs'
 import CartList from '@/components/modules/CartPage/CartList'
+import OrderInfoBlock from '@/components/modules/OrderInfoBlock/OrderInfoBlock'
 import { basePropsForMotion } from '@/constants/motion'
 import { useBreadcrumbs }            from '@/hooks/useBreadcrumbs'
 import { useCartByAuth }             from '@/hooks/useCartByAuth'
@@ -64,7 +65,9 @@ const CartPage = () => {
                   )}
                 </div>
                 <div className={styles.cart__right}>
-
+                  <div className={styles.cart__right__order}>
+                    <OrderInfoBlock isCorrectPromotionalCode={false} />
+                  </div>
                 </div>
               </div>
             </div>

@@ -49,6 +49,12 @@ export interface OrderInfoBlock {
   isOrderPage?: boolean
 }
 
+export interface IOrderInfoBlockProps {
+  isCorrectPromotionalCode?: boolean
+  isOrderPage?: boolean
+}
+
+
 export interface IEmptyPageContentProps {
   subtitle: string
   description: string
