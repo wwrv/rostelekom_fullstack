@@ -1,27 +1,25 @@
 'use client'
 
-import Link from "next/link"
-import { openMenu } from "@/context/modals"
-import { openSearchModall } from "@/context/modals"
-
+import Link                                                                  from "next/link"
+import { openMenu }                                                          from "@/context/modals"
+import { openSearchModall }                                                  from "@/context/modals"
 import { addOverFlowHiddenFromBody, handleOpenAuthPopup, triggerLoginCheck } from "@/lib/utils/common"
-import { useLang } from "@/hooks/useLang"
-import Menu from "./Menu"
-import Logo from "@/components/elements/Logo/Logo"
-
+import { useLang }                                                           from "@/hooks/useLang"
+import Menu                                                                  from "./Menu"
+import Logo                                                                  from "@/components/elements/Logo/Logo"                                                                 
+import CartPopup                                                             from "./CartPopup/CartPopup"
+import HeaderProfile                                                         from "./HeaderProfile"
+import { useUnit }                                                           from "effector-react"
+import { $isAuth }                                                           from "@/context/auth"
+import { faSpinner }                                                         from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon }                                                   from "@fortawesome/react-fontawesome"
+import { loginCheckFx }                                                      from "@/api/auth"
+import { useEffect }                                                         from "react"
+import { $user }                                                             from "@/context/user"
+import { useCartByAuth }                                                     from "@/hooks/useCartByAuth"
+import { addProductsFromLSToCart, setCartFromLS, setShouldShowEmpty }        from "@/context/cart"
+import { setLang }                                                           from "@/context/lang"
 import '../../../app/globalStyles/header.css'
-import CartPopup from "./CartPopup/CartPopup"
-import HeaderProfile from "./HeaderProfile"
-import { useUnit } from "effector-react"
-import { $isAuth } from "@/context/auth"
-import { faSpinner } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { loginCheckFx } from "@/api/auth"
-import { useEffect } from "react"
-import { $user } from "@/context/user"
-import { useCartByAuth } from "@/hooks/useCartByAuth"
-import { addProductsFromLSToCart, setCartFromLS } from "@/context/cart"
-import { setLang } from "@/context/lang"
 
 
 const Header = () => {
@@ -50,7 +48,12 @@ const Header = () => {
       }
     }
 
-    if(cart) {
+    if(cart && Array.isArray(cart)) {
+      if(!cart.length){
+        setShouldShowEmpty(true)
+        return
+      }
+
       setCartFromLS(cart)
     }
     triggerLoginCheck()

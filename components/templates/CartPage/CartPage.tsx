@@ -10,14 +10,14 @@ import { useBreadcrumbs }            from '@/hooks/useBreadcrumbs'
 import { useCartByAuth }             from '@/hooks/useCartByAuth'
 import { useLang }                   from '@/hooks/useLang'
 import { countWholeCartItemsAmount } from '@/lib/utils/cart'
-import { isUserAuth }                from '@/lib/utils/common'
-import cartSkeletonStyles            from '@/styles/cart-skeleton/index.module.scss'
 import { useUnit }                   from 'effector-react'
 import { motion }                    from 'framer-motion'
 import { useMediaQuery }             from '@/hooks/useMediaQuery'
 import PromotionalCode               from '@/components/modules/CartPage/PromotionalCode'
 import { useState }                  from 'react'
+import { $shouldShowEmpty }          from '@/context/cart'
 import styles                        from '@/styles/cart-page/index.module.scss'
+import cartSkeletonStyles            from '@/styles/cart-skeleton/index.module.scss'
 
 
 const CartPage = () => {
@@ -27,7 +27,7 @@ const CartPage = () => {
   const { getDefaultTextGenerator, getTextGenerator }           = useBreadcrumbs('cart')
   const isMedia930                                              = useMediaQuery(930)
   const [isCorrectPromotionalCode, setIsCorrectPromotionalCode] = useState(false)
-
+  const shouldShowEmpty                                                    = useUnit($shouldShowEmpty)
   return (
     <main>
         <Breadcrumbs
@@ -35,7 +35,7 @@ const CartPage = () => {
             getTextGenerator={getTextGenerator}
         />
 
-        {currentCartByAuth.length ? (
+        {!shouldShowEmpty ? (
         <section className={styles.cart}>
             <div className="container"> 
               <HeadingWithCount 
