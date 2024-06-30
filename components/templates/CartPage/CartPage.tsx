@@ -86,12 +86,12 @@ const CartPage = () => {
         </section>
         ) : (
         <section>
-          <div className="container">
+          <div className= 'container'>
             <EmptyPageContent
+              bgClassName={styles.empty_bg} 
               subtitle={translations[lang].common.cart_empty}
               description={translations[lang].common.cart_empty_advice}
               btnText={translations[lang].common.go_shopping}
-              bgClassName={styles.cart__imageCart} 
             />
           </div>
         </section>
