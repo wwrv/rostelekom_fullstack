@@ -56,15 +56,12 @@ export interface IOrderInfoBlockProps {
 
 
 export interface IEmptyPageContentProps {
-  subtitle: string
-  description: string
-  btnText: string
-  bgClassName: string
-  emptyWord?: string
-  bgWordClassName?: string
-  oopsWord?: string
-  title?: string
+  subtitle: string;
+  description: string;
+  btnText: string;
+  bgClassName: string;
 }
+
 
 export interface IContentTitleProps {
   title: string

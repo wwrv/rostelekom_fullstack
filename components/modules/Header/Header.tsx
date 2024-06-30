@@ -30,7 +30,6 @@ const Header = () => {
   const { lang, translations } = useLang();
   const user = useUnit($user)
   const currentCartByAuth = useCartByAuth()
-  console.log(currentCartByAuth)
 
   const handlOpenMenu = () => {
     openMenu()

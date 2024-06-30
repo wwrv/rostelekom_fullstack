@@ -49,7 +49,7 @@ export const addProductsFromLSToCart   = cart.createEvent<IAddProductsFromLSToCa
 export const updateCartItemCount       = cart.createEvent<IUpdateCartItemCountFx>()
 export const setTotalPrice             = cart.createEvent<number>()
 export const deleteProductFromCart     = cart.createEvent<IDeleteCartItemsFx>()
-
+export const setShouldShowEmpty           = cart.createEvent<boolean>()
 
 
 export const $cart = cart
@@ -78,6 +78,10 @@ export const $cartFromLs = cart
 export const $totalPrice = cart
     .createStore<number>(0)
     .on(setTotalPrice,(_,value) => value)
+
+export const $shouldShowEmpty = cart
+    .createStore(false)
+    .on(setShouldShowEmpty,(_, value) => value)
 
 
 sample({
