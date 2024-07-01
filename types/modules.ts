@@ -60,6 +60,10 @@ export interface IEmptyPageContentProps {
   description: string
   btnText: string
   bgClassName: string
+  emptyWord?: string
+  bgWordClassName?: string
+  oopsWord?: string
+  title?: string
 }
 
 
