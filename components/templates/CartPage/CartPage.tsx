@@ -27,7 +27,7 @@ const CartPage = () => {
   const { getDefaultTextGenerator, getTextGenerator }           = useBreadcrumbs('cart')
   const isMedia930                                              = useMediaQuery(930)
   const [isCorrectPromotionalCode, setIsCorrectPromotionalCode] = useState(false)
-  const shouldShowEmpty                                                    = useUnit($shouldShowEmpty)
+  const shouldShowEmpty                                         = useUnit($shouldShowEmpty)
   return (
     <main>
         <Breadcrumbs
@@ -41,6 +41,7 @@ const CartPage = () => {
               <HeadingWithCount 
                 count={countWholeCartItemsAmount(currentCartByAuth)}
                 title={translations[lang].breadcrumbs.cart}
+                spinner={cartSpinner}
               />
               <div className={styles.cart__inner}>
                 <div className={styles.cart__left}>

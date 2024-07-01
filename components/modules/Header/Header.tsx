@@ -39,6 +39,7 @@ const Header = () => {
   }
 
   useEffect(() => {
+    const auth = JSON.parse(localStorage.getItem('auth') as string)
     const lang = JSON.parse(localStorage.getItem('lang') as string)
     const cart = JSON.parse(localStorage.getItem('cart') as string)
 
@@ -47,6 +48,10 @@ const Header = () => {
         setLang(lang)
       }
     }
+
+    // if(auth?.accessToken){
+    //   return
+    // }
 
     if(cart && Array.isArray(cart)) {
       if(!cart.length){
@@ -57,6 +62,7 @@ const Header = () => {
       setCartFromLS(cart)
     }
     triggerLoginCheck()
+
   }, [])
 
   useEffect(() => {

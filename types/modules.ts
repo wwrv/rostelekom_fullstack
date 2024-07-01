@@ -56,10 +56,10 @@ export interface IOrderInfoBlockProps {
 
 
 export interface IEmptyPageContentProps {
-  subtitle: string;
-  description: string;
-  btnText: string;
-  bgClassName: string;
+  subtitle: string
+  description: string
+  btnText: string
+  bgClassName: string
 }
 
 

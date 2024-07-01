@@ -18,7 +18,6 @@ const EmptyPageContent = ({
     <div className={styles.empty_content}>
         {isMedia950 && <ContentTitle/> }
         <div className={`${styles.empty_content__bg} ${bgClassName}`} />
-
         <div className={styles.empty_content__inner}>
             <span className={styles.empty_content__word}>
                 {translations[lang].common.empty}
