@@ -4,7 +4,6 @@ import { useLang }      from "./useLang"
 import { usePageTitle } from "./usePageTitle"
 
 export const useBreadcrumbs = (page: string) => {
-    const { lang, translations }  = useLang()
     const { crumbText }           = useCrumbText(page)
     const getDefaultTextGenerator = useCallback(() => crumbText, [crumbText])
     const getTextGenerator        = useCallback((param:string)=> ({})[param], [])

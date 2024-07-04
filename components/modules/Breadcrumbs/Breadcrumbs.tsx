@@ -1,11 +1,10 @@
-'use client'
 /* eslint-disable max-len */
-import Link                             from 'next/link'
-import { useMemo }                      from 'react'
-import Crumb                            from './Crumb'
-import { useLang }                      from '@/hooks/useLang'
+import Link from 'next/link'
+import { useMemo } from 'react'
+import Crumb from './Crumb'
+import { useLang } from '@/hooks/useLang'
 import { usePathname, useSearchParams } from 'next/navigation'
-import { IBreadcrumbsProps }            from '@/types/modules'
+import { IBreadcrumbsProps } from '@/types/modules'
 
 const generatePathParts = (pathStr: string) => {
   const pathWithoutQuery = pathStr.split('?')[0]
@@ -16,17 +15,17 @@ const Breadcrumbs = ({
   getTextGenerator,
   getDefaultTextGenerator,
 }: IBreadcrumbsProps) => {
-  const pathname               = usePathname()
-  const searchParams           = useSearchParams()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
   const { lang, translations } = useLang()
 
   const breadcrumbs = useMemo(
     function generateBreadcrumbs() {
-      const asPathNestedRoutes   = generatePathParts(pathname)
+      const asPathNestedRoutes = generatePathParts(pathname)
       const pathnameNestedRoutes = generatePathParts(pathname)
 
       const crumbList = asPathNestedRoutes.map((subpath, idx) => {
-        const param   = pathnameNestedRoutes[idx]
+        const param = pathnameNestedRoutes[idx]
           .replace('[', '')
           .replace(']', '')
 
