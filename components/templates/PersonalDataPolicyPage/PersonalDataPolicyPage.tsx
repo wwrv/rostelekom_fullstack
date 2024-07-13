@@ -1,4 +1,3 @@
-
 'use client'
 import Breadcrumbs from '@/components/modules/Breadcrumbs/Breadcrumbs'
 import { useBreadcrumbs } from '@/hooks/useBreadcrumbs'
