@@ -1,13 +1,5 @@
-import PrivacyPolicyPage from "@/components/templates/PrivacyPolicyPage/PrivacyPolicyPage";
-import { Suspense } from "react";
+import PrivacyPolicyPage from '@/components/templates/PrivacyPolicyPage/PrivacyPolicyPage'
 
 export default function PersonalDataPolicy() {
-  function Loading() {
-    return <h2>🌀 Loading...</h2>;
-  }
-  return(
-    <Suspense fallback={<Loading />}>
-      <PrivacyPolicyPage />
-    </Suspense>
-    )
+  return <PrivacyPolicyPage />
 }

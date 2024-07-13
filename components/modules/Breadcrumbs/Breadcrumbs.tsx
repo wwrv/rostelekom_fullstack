@@ -1,47 +1,38 @@
-/* eslint-disable max-len */
-import Link from 'next/link'
-import { useMemo } from 'react'
-import Crumb from './Crumb'
-import { useLang } from '@/hooks/useLang'
-import { usePathname, useSearchParams } from 'next/navigation'
-import { IBreadcrumbsProps } from '@/types/modules'
+import React, { Suspense } from 'react';
+import Link from 'next/link';
+import { useMemo } from 'react';
+import Crumb from './Crumb';
+import { useLang } from '@/hooks/useLang';
+import { usePathname } from 'next/navigation';
+import { IBreadcrumbsProps } from '@/types/modules';
 
 const generatePathParts = (pathStr: string) => {
-  const pathWithoutQuery = pathStr.split('?')[0]
-  return pathWithoutQuery.split('/').filter((v) => v.length > 0)
-}
+  const pathWithoutQuery = pathStr.split('?')[0];
+  return pathWithoutQuery.split('/').filter((v) => v.length > 0);
+};
 
 const Breadcrumbs = ({
   getTextGenerator,
   getDefaultTextGenerator,
 }: IBreadcrumbsProps) => {
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const { lang, translations } = useLang()
+  const pathname = usePathname();
+  const { lang, translations } = useLang();
 
-  const breadcrumbs = useMemo(
-    function generateBreadcrumbs() {
-      const asPathNestedRoutes = generatePathParts(pathname)
-      const pathnameNestedRoutes = generatePathParts(pathname)
+  const breadcrumbs = useMemo(() => {
+    const asPathNestedRoutes = generatePathParts(pathname);
+    const pathnameNestedRoutes = generatePathParts(pathname);
 
-      const crumbList = asPathNestedRoutes.map((subpath, idx) => {
-        const param = pathnameNestedRoutes[idx]
-          .replace('[', '')
-          .replace(']', '')
+    return asPathNestedRoutes.map((subpath, idx) => {
+      const param = pathnameNestedRoutes[idx].replace('[', '').replace(']', '');
+      const href = '/' + asPathNestedRoutes.slice(0, idx + 1).join('/');
 
-        const href = '/' + asPathNestedRoutes.slice(0, idx + 1).join('/')
-
-        return {
-          href,
-          textGenerator: getTextGenerator(param, searchParams.getAll('')),
-          text: getDefaultTextGenerator(subpath, href),
-        }
-      })
-
-      return [...crumbList]
-    },
-    [pathname, getTextGenerator, searchParams, getDefaultTextGenerator, lang]
-  )
+      return {
+        href,
+        textGenerator: getTextGenerator(param, []), // Передаем пустой массив
+        text: getDefaultTextGenerator(subpath, href),
+      };
+    });
+  }, [pathname, getTextGenerator, getDefaultTextGenerator, lang]);
 
   return (
     <div className='container breadcrumbs__container'>
@@ -54,6 +45,7 @@ const Breadcrumbs = ({
         {breadcrumbs.map((crumb, idx) =>
           crumb.text ? (
             <li key={idx} className='breadcrumbs__item'>
+              
               {/**eslint-disable-next-line @typescript-eslint/ban-ts-comment
                * @ts-ignore */}
               <Crumb
@@ -62,13 +54,18 @@ const Breadcrumbs = ({
                 last={idx === breadcrumbs.length - 1}
               />
             </li>
-          ) : (
-            ''
-          )
+          ) : null
         )}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default Breadcrumbs
+const BreadcrumbsWrapper: React.FC<IBreadcrumbsProps> = (props) => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <Breadcrumbs {...props} />
+  </Suspense>
+);
+
+export default BreadcrumbsWrapper;
+
